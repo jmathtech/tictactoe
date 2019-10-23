@@ -1,6 +1,6 @@
 version: 1.0
 jobs:
-  Tic-Tac-Toe:
+  TicTacToe:
     docker:
       - image: alpine:3.7
     steps:
@@ -40,13 +40,13 @@ workflows:
  version: 2
  Example_Workflow:
    jobs:
-     - Tic-Tac-Toe
+     - TicTacToe
      - I-Have-Code:
          requires:
-           - Tic-Tac-Toe
+           - TicTacToe
      - Run-With-Node:
          requires:
-           - Tic-Tac-Toe
+           - TicTacToe
      - Hold-For-Approval:
          type: approval
          requires:
