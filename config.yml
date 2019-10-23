@@ -1,0 +1,57 @@
+version: 1.0
+jobs:
+  Tic-Tac-Toe:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Tic Tac Toe
+          command: |
+            echo 'Tic Tac Toe'
+            echo 'This is the delivery pipeline'
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - run:
+          name: Running In A Container With Node
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
+
+workflows:
+ version: 2
+ Example_Workflow:
+   jobs:
+     - Tic-Tac-Toe
+     - I-Have-Code:
+         requires:
+           - Tic-Tac-Toe
+     - Run-With-Node:
+         requires:
+           - Tic-Tac-Toe
+     - Hold-For-Approval:
+         type: approval
+         requires:
+           - Run-With-Node
+           - I-Have-Code
+     - Now-Complete:
+         requires:
+           - Hold-For-Approval
