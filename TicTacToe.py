@@ -1,6 +1,5 @@
 import tkinter.messagebox
 from tkinter import*
-#CODED BY JAMIL MATHENY
 
 root = Tk()
 root.geometry("1350x750+0+0")
